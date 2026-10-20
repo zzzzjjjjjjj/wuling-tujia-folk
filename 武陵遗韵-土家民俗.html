@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>武陵遗韵 · 土家民俗</title>
+<meta name="description" content="恩施土家族非遗交互式数字作品——西兰卡普、摆手舞、撒尔嗬、吊脚楼。全国大学生数字媒体科技作品及创意竞赛申报作品。">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiM4YTJiMWEiLz48cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIHJ4PSI5IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNmVhZDIiIHN0cm9rZS13aWR0aD0iMi41Ii8+PHRleHQgeD0iMzIiIHk9IjQ1IiBmb250LWZhbWlseT0iTm90byBTZXJpZiBTQyxzZXJpZiIgZm9udC1zaXplPSIzOCIgZm9udC13ZWlnaHQ9IjkwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2Y2ZWFkMiI+5q2mPC90ZXh0Pjwvc3ZnPg==">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap">
+<style>
+/* ================= 设计变量 ================= */
+:root{
+  --paper:#f2e9d6;
+  --paper2:#eadfc6;
+  --card:#faf4e3;
+  --ink:#2a2419;
+  --ink2:#4d4435;
+  --mut:#7b7059;
+  --dim:#a89b80;
+  --red:#b03a24;
+  --redD:#8a2b1a;
+  --indigo:#37496b;
+  --gold:#b8862c;
+  --line:rgba(42,36,25,.14);
+  --ease:cubic-bezier(.22,.78,.2,1);
+  --serif:'Noto Serif SC','Songti SC',serif;
+  --sans:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --hand:'Ma Shan Zheng','Noto Sans SC',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--sans);color:var(--ink);
+  background:
+    radial-gradient(1200px 800px at 85% -10%, rgba(184,134,44,.10), transparent 55%),
+    radial-gradient(1000px 700px at -10% 60%, rgba(55,73,107,.08), transparent 55%),
+    var(--paper);
+  overflow:hidden;height:100svh;-webkit-tap-highlight-color:transparent;
+}
+/* 纸面颗粒 */
+body::after{
+  content:"";position:fixed;z-index:9999;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.mono{font-family:'JetBrains Mono',ui-monospace,Consolas,monospace}
+button{font-family:inherit}
+/* ================= 顶栏 ================= */
+.hd{
+  position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:10px clamp(14px,4vw,26px);
+  background:rgba(242,233,214,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.seal{
+  width:34px;height:34px;border-radius:7px;flex:none;display:grid;place-items:center;
+  background:var(--redD);color:#f6ead2;font-family:var(--serif);font-weight:900;font-size:19px;
+  box-shadow:inset 0 0 0 2px rgba(246,234,210,.5);letter-spacing:0;
+}
+.hd-title{display:flex;align-items:center;gap:10px}
+.hd-name{font-family:var(--serif);font-weight:900;font-size:clamp(15px,4.4vw,19px);letter-spacing:.06em}
+.hd-name small{display:block;font-family:var(--sans);font-weight:400;font-size:10px;color:var(--mut);letter-spacing:.22em}
+.hd-right{display:flex;align-items:center;gap:clamp(10px,2.6vw,20px)}
+.counter{font-size:12px;color:var(--mut);letter-spacing:.1em}
+.audio-btn{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink2);transition:all .25s;
+}
+.audio-btn:hover{border-color:var(--red);color:var(--red)}
+.audio-btn svg{width:19px;height:19px}
+.audio-btn.off{color:var(--dim)}
+.audio-btn.off svg{opacity:.45}
+/* 顶部进度线 */
+.prog{position:fixed;top:55px;left:0;height:2px;background:var(--red);z-index:101;width:10%;transition:width .5s var(--ease)}
+/* ================= 底部导航 ================= */
+.footnav{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:8px 0 12px;pointer-events:none;
+}
+.footnav > *{pointer-events:auto}
+.fnav-btn{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(250,244,227,.92);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink2);box-shadow:0 4px 14px rgba(42,36,25,.08);
+  transition:all .25s;
+}
+.fnav-btn:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+.fnav-btn:disabled{opacity:.3;cursor:default;transform:none}
+.fnav-btn svg{width:20px;height:20px}
+.fnav-label{font-size:11px;color:var(--mut);letter-spacing:.08em;min-width:120px;text-align:center;background:rgba(242,233,214,.7);padding:5px 10px;border-radius:20px}
+/* ================= 页面容器 ================= */
+.app{position:relative;height:100svh;isolation:isolate;overflow:hidden}
+.page{
+  position:absolute;inset:0;z-index:2;overflow-y:auto;overscroll-behavior:none;contain:layout paint;
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;
+}
+.page.active{opacity:1;visibility:visible}
+.page.t-live{opacity:1!important;visibility:visible!important;z-index:5}
+.page.t-top{z-index:6}
+/* 转场动效类 */
+.t-vslide-out{transform:translate3d(0,-24%,0);opacity:0;transition:transform .62s var(--ease),opacity .62s ease}
+.t-vslide-in{transform:translate3d(0,0,0);opacity:1;transition:transform .62s var(--ease),opacity .62s ease}
+.t-vslide-init{transform:translate3d(0,100%,0);opacity:0}
+.t-hslide-out{transform:translate3d(-18%,0,0);opacity:0;transition:transform .56s var(--ease),opacity .56s ease}
+.t-hslide-in{transform:translate3d(0,0,0);opacity:1;transition:transform .56s var(--ease),opacity .56s ease}
+.t-hslide-init{transform:translate3d(100%,0,0);opacity:0}
+.t-zoom-out{transform:scale(1.08);opacity:0;transition:transform .62s var(--ease),opacity .62s ease}
+.t-zoom-in{transform:scale(1);opacity:1;transition:transform .62s var(--ease),opacity .62s ease}
+.t-zoom-init{transform:scale(.88);opacity:0}
+.t-zoomin-out{transform:scale(1.26);opacity:0;transition:transform .72s cubic-bezier(.3,.12,.3,1),opacity .72s ease}
+.t-zoomin-in{transform:scale(1);opacity:1;transition:transform .72s cubic-bezier(.3,.12,.3,1),opacity .72s ease}
+.t-zoomin-init{transform:scale(.95);opacity:0}
+.t-fade-in{opacity:1;transition:opacity .7s ease}
+.t-fade-out{opacity:0;transition:opacity .45s ease}
+.t-fade-init{opacity:0}
+.t-shake{animation:shake .7s var(--ease) both}
+@keyframes shake{
+  0%,100%{transform:translate3d(0,0,0)}
+  14%{transform:translate3d(-7px,0,0)}
+  32%{transform:translate3d(6px,0,0)}
+  50%{transform:translate3d(-4px,0,0)}
+  66%{transform:translate3d(3px,0,0)}
+  82%{transform:translate3d(-1px,0,0)}
+}
+/* ================= 转场遮罩层 ================= */
+.ov{position:fixed;inset:0;z-index:80;pointer-events:none;visibility:hidden}
+.ov.on{visibility:visible}
+/* 织锦纹样蒙板 */
+.ov-brocade{
+  background:radial-gradient(circle at 50% 42%, #f1e6cb 0%, #e5d3a8 78%);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cdefs%3E%3Cpattern id='b' width='150' height='150' patternUnits='userSpaceOnUse'%3E%3Cpath d='M75 12 L138 75 L75 138 L12 75 Z' fill='none' stroke='%23000' stroke-width='7'/%3E%3Cpath d='M75 30 L120 75 L75 120 L30 75 Z' fill='none' stroke='%23000' stroke-width='4'/%3E%3Cpath d='M75 46 L104 75 L75 104 L46 75 Z' fill='%23000'/%3E%3Ccircle cx='75' cy='75' r='9' fill='%23fff'/%3E%3Cpath d='M0 0v24h12M150 0v24h-12M0 150v-24h12M150 150v-24h-12' stroke='%23000' stroke-width='5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='150' height='150' fill='url(%23b)'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cdefs%3E%3Cpattern id='b' width='150' height='150' patternUnits='userSpaceOnUse'%3E%3Cpath d='M75 12 L138 75 L75 138 L12 75 Z' fill='none' stroke='%23000' stroke-width='7'/%3E%3Cpath d='M75 30 L120 75 L75 120 L30 75 Z' fill='none' stroke='%23000' stroke-width='4'/%3E%3Cpath d='M75 46 L104 75 L75 104 L46 75 Z' fill='%23000'/%3E%3Ccircle cx='75' cy='75' r='9' fill='%23fff'/%3E%3Cpath d='M0 0v24h12M150 0v24h-12M0 150v-24h12M150 150v-24h-12' stroke='%23000' stroke-width='5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='150' height='150' fill='url(%23b)'/%3E%3C/svg%3E");
+  -webkit-mask-size:130px 130px;mask-size:130px 130px;
+  transform:scale3d(.03,.03,1);transform-origin:50% 42%;opacity:0;
+}
+.ov-brocade.on{animation:brocadeIn .72s var(--ease) forwards}
+.ov-brocade.out{animation:brocadeOut .72s var(--ease) forwards}
+@keyframes brocadeIn{0%{transform:scale3d(.03,.03,1);opacity:0}30%{opacity:1}100%{transform:scale3d(1,1,1);opacity:1}}
+@keyframes brocadeOut{0%{transform:scale3d(1,1,1);opacity:1}100%{transform:scale3d(1,1,1);opacity:0}}
+/* 残影拖尾 */
+.ov-trail{background:transparent}
+.ov-trail .g{position:absolute;bottom:12%;width:64px;opacity:0;color:var(--red)}
+.ov-trail .g svg{width:100%;display:block}
+.ov-trail.on .g{animation:trailMove 1s var(--ease) forwards}
+.ov-trail.on .g2{animation-delay:.09s}
+.ov-trail.on .g3{animation-delay:.18s}
+.ov-trail.on .g4{animation-delay:.27s}
+@keyframes trailMove{0%{transform:translateX(6vw) scale(.7);opacity:0}18%{opacity:.75}60%{opacity:.3}100%{transform:translateX(88vw) scale(1.05);opacity:0}}
+/* 木构线条生长 */
+.ov-lines svg{position:absolute;left:50%;top:54%;width:min(70vw,420px);transform:translate(-50%,-50%)}
+.ov-lines path,.ov-lines line{stroke:var(--red);stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:700;stroke-dashoffset:700}
+.ov-lines.on path,.ov-lines.on line{animation:draw 1s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* ================= 入场动画 ================= */
+.rv{opacity:0;transform:translate3d(0,24px,0);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.page.active .rv.in{opacity:1;transform:translate3d(0,0,0)}
+/* ================= 通用组件 ================= */
+.page-in{width:min(720px,100%);margin:0 auto;padding:clamp(68px,11vh,96px) clamp(18px,5vw,34px) clamp(84px,10vh,96px)}
+.sec-label{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;color:var(--red);margin-bottom:14px;font-weight:500}
+.sec-label::before{content:"";width:24px;height:1px;background:var(--red)}
+.sec-title{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,6.4vw,2.5rem);line-height:1.25;letter-spacing:.04em;margin-bottom:16px}
+.sec-sub{color:var(--ink2);font-size:clamp(.9rem,3.6vw,1rem);line-height:1.9;margin-bottom:18px}
+.para{color:var(--mut);font-size:clamp(.86rem,3.4vw,.95rem);line-height:1.95;letter-spacing:.02em}
+.para + .para{margin-top:12px}
+.cta{
+  display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:13px 26px;border-radius:10px;
+  background:linear-gradient(160deg,var(--red),var(--redD));color:#f9efd8;font-weight:600;font-size:.95rem;
+  border:0;cursor:pointer;text-decoration:none;box-shadow:0 10px 24px rgba(138,43,26,.28);
+  transition:transform 240ms var(--ease),box-shadow 240ms ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(138,43,26,.34)}
+.cta:active{transform:translateY(-1px)}
+.cta svg{width:16px;height:16px}
+.cta.ghost{background:transparent;color:var(--ink2);box-shadow:none;border:1.5px solid var(--line)}
+.cta.ghost:hover{border-color:var(--red);color:var(--red);box-shadow:none}
+.note{font-size:11.5px;color:var(--dim);line-height:1.7;margin-top:12px}
+.tag{
+  display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;letter-spacing:.1em;
+  border:1px solid rgba(176,58,36,.35);color:var(--red);background:rgba(176,58,36,.06);margin-bottom:12px;
+}
+.page-footline{margin-top:34px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+/* ================= 弹窗 ================= */
+.modal-back{
+  position:fixed;inset:0;z-index:200;background:rgba(42,36,25,.42);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;visibility:hidden;transition:opacity .3s;
+}
+.modal-back.on{opacity:1;visibility:visible}
+.modal{
+  width:min(520px,100%);max-height:76svh;overflow-y:auto;background:var(--card);border-radius:14px;
+  border:1px solid rgba(42,36,25,.16);box-shadow:0 30px 70px rgba(42,36,25,.3);
+  padding:26px 24px 22px;transform:translateY(14px);transition:transform .35s var(--ease);
+}
+.modal-back.on .modal{transform:translateY(0)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.modal-title{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:.03em;color:var(--redD)}
+.modal-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;color:var(--mut);font-size:15px}
+.modal-close:hover{color:var(--red);border-color:var(--red)}
+.modal-body{font-size:.9rem;color:var(--ink2);line-height:1.9}
+.modal-body .m-motif{width:100%;height:120px;border-radius:10px;background:var(--paper2);display:grid;place-items:center;margin-bottom:14px;overflow:hidden}
+/* ================= P1 封面 ================= */
+.p1{background:#10131a}
+.p1-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.92)}
+.p1-bg img{width:100%;height:100%;object-fit:cover}
+.p1-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,19,26,.34) 0%,rgba(16,19,26,.08) 40%,rgba(16,19,26,.82) 100%)}
+.p1-brocade{position:absolute;inset:0;opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cdefs%3E%3Cpattern id='b' width='150' height='150' patternUnits='userSpaceOnUse'%3E%3Cpath d='M75 12 L138 75 L75 138 L12 75 Z' fill='none' stroke='%23e5d3a8' stroke-width='3'/%3E%3Cpath d='M75 38 L112 75 L75 112 L38 75 Z' fill='none' stroke='%23e5d3a8' stroke-width='2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='150' height='150' fill='url(%23b)'/%3E%3C/svg%3E");
+  background-size:150px 150px;
+}
+.p1-in{
+  position:relative;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 26px 90px;color:#f2ead6;
+}
+.p1-seal{
+  width:56px;height:56px;border-radius:10px;display:grid;place-items:center;margin-bottom:20px;
+  background:var(--redD);color:#f6ead2;font-family:var(--serif);font-weight:900;font-size:30px;
+  box-shadow:inset 0 0 0 3px rgba(246,234,210,.5),0 12px 30px rgba(0,0,0,.35);
+}
+.p1-kicker{font-size:11px;letter-spacing:.42em;color:#d9c9a3;margin-bottom:14px;font-weight:500}
+.p1-title{
+  font-family:var(--serif);font-weight:900;font-size:clamp(2.5rem,11vw,4.2rem);letter-spacing:.14em;line-height:1.2;
+  text-shadow:0 6px 26px rgba(0,0,0,.4);
+}
+.p1-title .sub{display:block;font-size:.46em;letter-spacing:.5em;color:#e9cf9b;margin-top:6px}
+.p1-sub{margin-top:18px;font-size:clamp(.85rem,3.4vw,.95rem);color:#f5eeda;letter-spacing:.12em;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.p1-audio-hint{margin-top:10px;font-size:11.5px;color:#9d937e;letter-spacing:.14em;display:flex;align-items:center;gap:6px;justify-content:center}
+.p1-cta{margin-top:34px}
+.p1-foot{position:absolute;left:0;right:0;bottom:22px;font-size:10.5px;color:#8d8571;letter-spacing:.14em;text-align:center}
+.clouds{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.cloud{position:absolute;height:2px;background:rgba(242,234,214,.5);border-radius:2px;animation:drift linear infinite}
+.cloud1{width:200px;top:22%;animation-duration:38s}
+.cloud2{width:140px;top:34%;animation-duration:52s;animation-delay:-14s}
+.cloud3{width:240px;top:46%;animation-duration:44s;animation-delay:-26s}
+@keyframes drift{0%{transform:translateX(-30vw)}100%{transform:translateX(110vw)}}
+/* ================= P2 引言 ================= */
+.p2-deco{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cpattern id='g' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cpath d='M60 14 L106 60 L60 106 L14 60 Z' fill='none' stroke='%23b8862c' stroke-width='1.4'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23g)'/%3E%3C/svg%3E");
+  background-size:120px 120px;
+}
+.anchor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+@media(min-width:560px){.anchor-grid{grid-template-columns:repeat(4,1fr)}}
+.anchor{
+  display:flex;flex-direction:column;align-items:center;gap:9px;padding:15px 8px 13px;border-radius:12px;
+  background:var(--card);border:1px solid var(--line);cursor:pointer;transition:all .3s var(--ease);text-align:center;
+}
+.anchor:hover{transform:translateY(-4px);border-color:var(--red);box-shadow:0 12px 26px rgba(176,58,36,.14)}
+.anchor svg{width:30px;height:30px;color:var(--red)}
+.anchor b{font-size:.9rem;font-weight:700;letter-spacing:.06em}
+.anchor span{font-size:.68rem;color:var(--mut);letter-spacing:.06em}
+/* ================= P3 织锦总览 ================= */
+.two-col{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
+@media(min-width:640px){.two-col{grid-template-columns:5fr 6fr}}
+.pic-frame{
+  border-radius:14px;overflow:hidden;border:1px solid rgba(42,36,25,.16);background:var(--card);
+  box-shadow:0 16px 40px rgba(42,36,25,.14);
+}
+.pic-frame img{width:100%;display:block;object-fit:cover;aspect-ratio:4/3}
+.pic-cap{font-size:11px;color:var(--dim);text-align:center;padding:7px;letter-spacing:.1em}
+.motif-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+@media(max-width:460px){.motif-cards{grid-template-columns:1fr}}
+.motif-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 13px;cursor:pointer;
+  transition:all .3s var(--ease);text-align:center;
+}
+.motif-card:hover{transform:translateY(-4px);border-color:var(--red);box-shadow:0 12px 26px rgba(176,58,36,.13)}
+.motif-card svg{width:46px;height:46px;margin:0 auto 10px;display:block;color:var(--red)}
+.motif-card b{font-size:.92rem;letter-spacing:.08em}
+.motif-card span{display:block;font-size:.7rem;color:var(--mut);margin-top:5px;letter-spacing:.05em}
+/* ================= P4 纹样解析 ================= */
+.weave-zone{position:relative;border-radius:14px;border:1px solid rgba(42,36,25,.16);background:var(--card);overflow:hidden;margin-top:8px}
+.weave-band{
+  position:relative;height:clamp(120px,26vw,150px);overflow:hidden;
+  background:
+    repeating-linear-gradient(90deg,var(--redD) 0 3px,transparent 3px 9px),
+    repeating-linear-gradient(180deg,rgba(42,36,25,.05) 0 1px,transparent 1px 7px),
+    linear-gradient(180deg,#c2452f,#9c3120);
+}
+.shuttle{position:absolute;top:50%;left:50%;width:56px;height:20px;margin:-10px 0 0 -28px;animation:weave 4.6s var(--ease) infinite;z-index:2}
+.shuttle::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#6b4a22,#9a6b2f 45%,#5c3f1e);border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.shuttle::after{content:"";position:absolute;top:4px;left:3px;right:3px;height:2px;background:rgba(255,240,220,.5);border-radius:2px}
+@keyframes weave{0%{transform:translateX(0) rotate(0)}12%{transform:translateX(3px) rotate(0)}18%{transform:translateX(-2px) rotate(-8deg)}34%{transform:translateX(-16vw)}42%{transform:translateX(0) rotate(0)}100%{transform:translateX(0) rotate(0)}}
+.pattern-map{position:relative;margin-top:18px;border-radius:14px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.pattern-map svg{width:100%;display:block}
+.pattern-map .hot{
+  position:absolute;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--red);background:rgba(250,244,227,.88);
+  cursor:pointer;font-size:13px;color:var(--red);font-weight:700;display:grid;place-items:center;
+  box-shadow:0 4px 12px rgba(176,58,36,.3);transition:transform .25s;
+}
+.pattern-map .hot:hover{transform:scale(1.15)}
+.hot1{left:44%;top:8%}.hot2{left:72%;top:52%}.hot3{left:16%;top:62%}
+.tech-list{margin-top:18px;display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:560px){.tech-list{grid-template-columns:repeat(3,1fr)}}
+.tech-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:12px 14px}
+.tech-item b{display:block;font-size:.92rem;margin-bottom:4px;letter-spacing:.04em}
+.tech-item span{font-size:.78rem;color:var(--mut);line-height:1.7}
+/* ================= P5 摆手舞 ================= */
+.p5-hero{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(42,36,25,.16);box-shadow:0 16px 40px rgba(42,36,25,.14)}
+.p5-hero img{width:100%;display:block;object-fit:cover;aspect-ratio:4/3}
+.dancers{position:relative;height:130px;margin-top:18px;border-radius:12px;background:linear-gradient(180deg,#f6ecd4,#ecdfc2);border:1px solid var(--line);overflow:hidden}
+.dancer{position:absolute;bottom:8px;width:44px;color:var(--red);opacity:.85;animation:bob 3.2s var(--ease) infinite}
+.dancer svg{width:100%;display:block}
+.dancer:nth-child(2){left:22%;animation-delay:-1.1s;transform:scale(.9)}
+.dancer:nth-child(3){left:52%;animation-delay:-2.2s}
+.dancer:nth-child(4){left:78%;animation-delay:-.6s;transform:scale(.86)}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+.dance-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.snd-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;cursor:pointer;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink2);font-size:.9rem;font-weight:600;transition:all .25s;
+}
+.snd-btn:hover{border-color:var(--indigo);color:var(--indigo)}
+.snd-btn.playing{background:var(--indigo);color:#f2ead6;border-color:var(--indigo)}
+.snd-btn svg{width:17px;height:17px}
+/* ================= P6 撒尔嗬（庄重深色） ================= */
+.p6{background:radial-gradient(900px 600px at 80% 0%, rgba(55,73,107,.5), transparent 60%),linear-gradient(180deg,#1d1a16,#262018);color:#e8e0cc}
+.p6 .sec-label{color:#e9cf9b}
+.p6 .sec-label::before{background:#e9cf9b}
+.p6 .para{color:#bdb29b}
+.p6 .sec-sub{color:#d8cfb8}
+.p6 .tag{border-color:rgba(233,207,155,.4);color:#e9cf9b;background:rgba(233,207,155,.08)}
+.p6-respect{display:flex;align-items:center;gap:10px;background:rgba(233,207,155,.09);border:1px solid rgba(233,207,155,.3);border-radius:10px;padding:12px 14px;margin-bottom:18px;font-size:.86rem;color:#e9cf9b;letter-spacing:.04em}
+.p6-respect svg{width:20px;height:20px;flex:none}
+.p6-hero{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(233,207,155,.22);margin-top:20px;background:#17130f}
+.p6-hero img{width:100%;display:block;object-fit:cover;aspect-ratio:16/10}
+.p6-hero .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:11px;color:#cfc4ac;background:linear-gradient(180deg,transparent,rgba(20,17,13,.8));letter-spacing:.1em}
+.p6-note{font-size:11px;color:#8f8470;margin-top:12px;line-height:1.8}
+/* ================= P7 吊脚楼 ================= */
+.stilt-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(42,36,25,.16);box-shadow:0 16px 40px rgba(42,36,25,.14)}
+.stilt-wrap img{width:100%;display:block;object-fit:cover;aspect-ratio:16/10}
+.hotspot{
+  position:absolute;width:30px;height:30px;border-radius:50%;border:0;cursor:pointer;background:none;padding:0;
+}
+.hotspot::before,.hotspot::after{content:"";position:absolute;inset:0;border-radius:50%}
+.hotspot::before{background:rgba(176,58,36,.85);box-shadow:0 0 0 4px rgba(250,244,227,.75);transition:transform .25s}
+.hotspot::after{border:1.5px solid rgba(176,58,36,.5);animation:ping 2s var(--ease) infinite}
+.hotspot:hover::before{transform:scale(1.25)}
+@keyframes ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.1);opacity:0}}
+.hs1{left:62%;top:24%}.hs2{left:44%;top:52%}.hs3{left:70%;top:66%}.hs4{left:26%;top:74%}
+.hs-label{position:absolute;transform:translateX(-50%);bottom:calc(100% + 6px);left:50%;font-size:10px;letter-spacing:.1em;color:var(--redD);background:rgba(250,244,227,.92);padding:2px 7px;border-radius:4px;white-space:nowrap;display:none}
+.hotspot:hover .hs-label{display:block}
+/* ================= P8 营造技艺 ================= */
+.build-stage{
+  position:relative;border-radius:14px;background:var(--card);border:1px solid var(--line);overflow:hidden;margin-top:16px;
+}
+.build-stage svg{width:100%;display:block}
+.build-stage .layer{opacity:0;transition:opacity .55s var(--ease)}
+.build-stage .layer.shown{opacity:1}
+.slider-row{margin-top:16px;display:flex;align-items:center;gap:14px}
+.slider-row input[type=range]{
+  flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;
+  background:linear-gradient(90deg,var(--red) var(--fill,0%),rgba(42,36,25,.14) var(--fill,0%));outline:none;cursor:pointer;
+}
+.slider-row input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--card);
+  border:3px solid var(--red);box-shadow:0 3px 10px rgba(42,36,25,.25);cursor:pointer;
+}
+.slider-row input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--card);border:3px solid var(--red);cursor:pointer}
+.stage-label{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--redD);min-width:56px;text-align:center}
+.stage-step{font-size:11px;color:var(--mut);letter-spacing:.1em}
+/* ================= P9 答题 ================= */
+.quiz-card{background:var(--card);border:1px solid rgba(42,36,25,.16);border-radius:14px;padding:20px 18px;margin-top:10px}
+.q-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.q-no{width:30px;height:30px;border-radius:50%;background:var(--redD);color:#f6ead2;display:grid;place-items:center;font-weight:700;font-size:.9rem;flex:none}
+.q-text{font-family:var(--serif);font-weight:700;font-size:1.02rem;line-height:1.6;letter-spacing:.02em}
+.q-opts{display:grid;gap:9px}
+.q-opt{
+  text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:#fdfaf0;
+  font-size:.9rem;color:var(--ink2);cursor:pointer;transition:all .25s;display:flex;gap:10px;align-items:flex-start;
+}
+.q-opt:hover{border-color:var(--red)}
+.q-opt .k{flex:none;font-weight:700;color:var(--red);min-width:16px}
+.q-opt.right{border-color:#3d7a46;background:rgba(61,122,70,.1);color:#2e5c36}
+.q-opt.right .k{color:#3d7a46}
+.q-opt.wrong{border-color:var(--red);background:rgba(176,58,36,.08)}
+.q-opt:disabled{cursor:default;opacity:.85}
+.q-exp{margin-top:12px;display:none;font-size:.82rem;line-height:1.8;color:var(--ink2);background:var(--paper2);border-radius:8px;padding:10px 13px}
+.q-exp.show{display:block}
+.q-next{margin-top:14px}
+.quiz-done{display:none;text-align:center;padding:10px 0 4px}
+.quiz-done.show{display:block}
+.score-big{font-family:var(--serif);font-weight:900;font-size:3.2rem;color:var(--redD);margin:6px 0 2px}
+.score-line{font-size:.95rem;color:var(--mut)}
+.verdict{font-family:var(--hand);font-size:1.5rem;color:var(--red);margin:12px 0 18px;letter-spacing:.06em}
+/* ================= P10 封底 ================= */
+.p10{background:#131018}
+.p10-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.p10-bg img{width:100%;height:100%;object-fit:cover}
+.p10-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,16,24,.55),rgba(19,16,24,.44) 45%,rgba(19,16,24,.93))}
+.p10-in{position:relative;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 26px 96px;color:#f0e6cd}
+.p10-slogan{font-family:var(--serif);font-weight:900;font-size:clamp(1.35rem,6vw,1.9rem);line-height:1.7;letter-spacing:.1em;text-shadow:0 4px 20px rgba(0,0,0,.45)}
+.p10-slogan em{font-style:normal;color:#e9cf9b}
+.p10-seal{width:44px;height:44px;border-radius:8px;display:grid;place-items:center;margin-bottom:22px;background:var(--redD);color:#f6ead2;font-family:var(--serif);font-weight:900;font-size:24px;box-shadow:inset 0 0 0 2px rgba(246,234,210,.5)}
+.info-cards{width:min(520px,100%);margin-top:26px;display:grid;gap:10px;text-align:left}
+.info-card{background:rgba(240,230,205,.1);border:1px solid rgba(240,230,205,.24);border-radius:10px;padding:12px 15px;font-size:.8rem;color:#e6dcc3;line-height:1.8;letter-spacing:.03em}
+.info-card b{color:#f2dfb4;letter-spacing:.08em}
+.qr-zone{
+  margin-top:20px;width:120px;height:120px;border-radius:12px;background:#fdfaf0;border:2px dashed rgba(233,207,155,.6);
+  display:grid;place-items:center;text-align:center;padding:8px;
+}
+.qr-zone span{font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.6}
+.p10-back{margin-top:22px}
+.p10-copy{position:absolute;left:0;right:0;bottom:20px;font-size:10.5px;color:#8d8571;letter-spacing:.12em;text-align:center}
+/* ================= 响应式 ================= */
+@media(max-width:480px){
+  .footnav{gap:10px}
+  .fnav-label{min-width:96px;font-size:10px}
+  .p6-hero img{aspect-ratio:3/2}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .rv{opacity:1;transform:none}
+  .cloud,.shuttle,.dancer{animation:none!important}
+  .hotspot::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header class="hd">
+  <div class="hd-title">
+    <span class="seal" aria-hidden="true">武</span>
+    <div class="hd-name">武陵遗韵<small>TUJIA FOLK HERITAGE</small></div>
+  </div>
+  <div class="hd-right">
+    <span class="counter mono" id="counter">01 / 10</span>
+    <button class="audio-btn" id="audioBtn" aria-label="关闭背景音乐" aria-pressed="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" id="audioIcoOn"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" id="audioIcoOff" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6"/><path d="M17 9l6 6"/></svg>
+    </button>
+  </div>
+</header>
+<div class="prog" id="prog" aria-hidden="true"></div>
+
+<!-- 底部导航 -->
+<nav class="footnav" aria-label="页面导航">
+  <button class="fnav-btn" id="prevBtn" aria-label="上一页">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <span class="fnav-label mono" id="fnavLabel">序章 · 武陵开篇</span>
+  <button class="fnav-btn" id="nextBtn" aria-label="下一页">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+</nav>
+
+<!-- 转场遮罩层 -->
+<div class="ov ov-brocade" id="ovBrocade" aria-hidden="true"></div>
+<div class="ov ov-trail" id="ovTrail" aria-hidden="true">
+  <span class="g g1"><svg viewBox="0 0 40 62" fill="currentColor" aria-hidden="true"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+  <span class="g g2"><svg viewBox="0 0 40 62" fill="currentColor" aria-hidden="true"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+  <span class="g g3"><svg viewBox="0 0 40 62" fill="currentColor" aria-hidden="true"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+  <span class="g g4"><svg viewBox="0 0 40 62" fill="currentColor" aria-hidden="true"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+</div>
+<div class="ov ov-lines" id="ovLines" aria-hidden="true">
+  <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M30 200h240"/><path d="M60 200V70M150 200V30M240 200V70"/>
+    <path d="M60 100h180M60 150h180M30 70h240"/>
+    <path d="M30 70l120-40 120 40"/><path d="M60 30h180"/>
+    <path d="M80 100v50M120 100v50M180 100v50M220 100v50"/>
+  </svg>
+</div>
+
+<div class="app" id="app">
+
+  <!-- ===== 页面 01 · 封面 ===== -->
+  <section class="page active" id="p1" aria-label="封面：武陵遗韵土家民俗">
+    <div class="p1">
+      <div class="p1-bg" aria-hidden="true"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/EXtFb1tVloucbuxvh0Ac0MxTn2d" alt="" loading="eager"></div>
+      <div class="p1-scrim" aria-hidden="true"></div>
+      <div class="p1-brocade" aria-hidden="true"></div>
+      <div class="clouds" aria-hidden="true"><span class="cloud cloud1"></span><span class="cloud cloud2"></span><span class="cloud cloud3"></span></div>
+      <div class="p1-in">
+        <div class="p1-seal rv" data-d="120" aria-hidden="true">武</div>
+        <p class="p1-kicker rv" data-d="220">恩施土家族非遗 · 交互式数字作品</p>
+        <h1 class="p1-title rv" data-d="340">武陵遗韵<span class="sub">土家民俗</span></h1>
+        <p class="p1-sub rv" data-d="480">西兰卡普 · 摆手舞 · 撒尔嗬 · 吊脚楼</p>
+        <p class="p1-audio-hint rv" data-d="560">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+          建议佩戴耳机 · 聆听武陵山风
+        </p>
+        <div class="p1-cta rv" data-d="660">
+          <button class="cta" data-go="1">开启探索
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="p1-foot rv" data-d="780">全国大学生数字媒体科技作品及创意竞赛 · 申报作品</p>
+    </div>
+  </section>
+
+  <!-- ===== 页面 02 · 人文引言 ===== -->
+  <section class="page" id="p2" aria-label="人文引言" inert>
+    <div class="p2-deco" aria-hidden="true"></div>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">序章 · 武陵开篇</p>
+      <h2 class="sec-title rv" data-d="60">武陵山的土家故事</h2>
+      <p class="para rv" data-d="140">武陵山区横亘湘、鄂、渝、黔交界之地，群山如海，云雾常年缭绕。土家先民在这片山水间依山而居、傍水而生，创造了西兰卡普、摆手舞、撒尔嗬与吊脚楼等灿若星河的文化遗产。</p>
+      <p class="para rv" data-d="260">本作品以恩施土家族四大非遗为线索，以叙事化交互 H5 的方式，带您翻山越岭——触摸织机上的经纬，聆听歌舞里的悲欢，走进吊脚楼下的烟火，让武陵遗韵在今天重新被看见。</p>
+      <div class="anchor-grid">
+        <button class="anchor rv" data-d="380" data-go="2" aria-label="跳转到西兰卡普板块">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 6l14 8v20l-14 8-14-8V14z"/><path d="M24 14l10 6v10l-10 6-10-6V20z"/><path d="M24 20l5 3v5l-5 3-5-3v-5z"/></svg>
+          <b>西兰卡普</b><span>织锦华章</span>
+        </button>
+        <button class="anchor rv" data-d="440" data-go="4" aria-label="跳转到摆手舞板块">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="13" r="6"/><path d="M14 24c2-5 6-7 10-7s8 2 10 7l-4 20h-12z"/><path d="M14 28l-7 6M34 28l7 6"/></svg>
+          <b>摆手舞</b><span>歌舞传情</span>
+        </button>
+        <button class="anchor rv" data-d="500" data-go="5" aria-label="跳转到撒尔嗬板块">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="14"/><path d="M24 24l8-8"/><path d="M24 24l6 10"/><path d="M24 24l-9 3"/></svg>
+          <b>撒尔嗬</b><span>歌舞传情</span>
+        </button>
+        <button class="anchor rv" data-d="560" data-go="6" aria-label="跳转到吊脚楼板块">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 42V20M40 42V20"/><path d="M8 20h32M14 20v-7M34 20v-7"/><path d="M14 13l10-7 10 7"/><path d="M16 26h8M28 26h4M16 32h8M28 32h4"/></svg>
+          <b>吊脚楼</b><span>山居匠心</span>
+        </button>
+      </div>
+      <p class="note rv" data-d="620">上滑或点击圆点 · 走进「织锦华章」</p>
+    </div>
+  </section>
+
+  <!-- ===== 页面 03 · 西兰卡普总览 ===== -->
+  <section class="page" id="p3" aria-label="西兰卡普总览" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">板块二 · 织锦华章</p>
+      <h2 class="sec-title rv" data-d="60">西兰卡普 · 织进山河的铺盖</h2>
+      <div class="two-col">
+        <div class="pic-frame rv" data-d="140">
+          <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/LA9KbtTdRobKUQxTGracuZfUnxg" alt="手绘土家族斜织机插画" loading="lazy">
+          <p class="pic-cap">土家斜织机 · 梭引经纬</p>
+        </div>
+        <div class="rv" data-d="220">
+          <p class="para">西兰卡普，土家语意为「花铺盖」，是土家族的传统织锦，2006 年列入国家级非物质文化遗产名录。织娘以织机为器、通经断纬、反面挑织，把山川日月织进布匹——一块花铺盖，就是土家人一生的行囊。</p>
+          <p class="para">纹样取法自然与信仰，几何之中藏万物。点击卡片，看看它们背后的话语。</p>
+        </div>
+      </div>
+      <div class="motif-cards">
+        <button class="motif-card rv" data-d="300" data-motif="0" aria-label="查看四十八勾纹样含义">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M24 4l17 10v20L24 44 7 34V14z"/><path d="M24 12l12 7v14l-12 7-12-7V19z"/><path d="M24 19l6 4v8l-6 4-6-4v-8z"/><circle cx="24" cy="27" r="2.5"/></svg>
+          <b>四十八勾</b><span>太阳与光芒</span>
+        </button>
+        <button class="motif-card rv" data-d="360" data-motif="1" aria-label="查看阳雀花纹样含义">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 32c10-14 26-16 36-4 4-14-6-22-20-20C12 10 4 18 6 32z"/><circle cx="34" cy="14" r="3"/><path d="M12 36l-4 6M16 38l-3 6"/></svg>
+          <b>阳雀花</b><span>春回与希望</span>
+        </button>
+        <button class="motif-card rv" data-d="420" data-motif="2" aria-label="查看台台花纹样含义">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 40h36M10 34h28M14 28h20M18 22h12M22 16h4"/><path d="M8 40l4-6M40 40l-4-6M12 34l4-6M36 34l-4-6M16 28l4-6M32 28l-4-6M20 22l4-6M28 22l-4-6"/></svg>
+          <b>台台花</b><span>节节登高</span>
+        </button>
+      </div>
+      <div class="page-footline rv" data-d="480">
+        <span class="note" style="margin:0">纹样寓意取自常见解读，仅作科普示意</span>
+        <button class="cta ghost" data-go="3">深入纹样密码
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 04 · 纹样深度解析 ===== -->
+  <section class="page" id="p4" aria-label="纹样深度解析" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">织锦华章 · 深读</p>
+      <h2 class="sec-title rv" data-d="60">纹样里的民族密码</h2>
+      <div class="pattern-map rv" data-d="140">
+        <svg viewBox="0 0 360 260" aria-hidden="true">
+          <rect width="360" height="260" fill="#fdfaf0"/>
+          <g stroke="#b03a24" stroke-width="1.4" fill="none">
+            <path d="M180 26l118 68v72l-118 68-118-68V94z"/>
+            <path d="M180 52l92 53v58l-92 53-92-53v-58z"/>
+            <path d="M180 78l66 38v42l-66 38-66-38v-42z"/>
+          </g>
+          <g stroke="#b8862c" stroke-width="1.2" fill="none">
+            <path d="M180 100l-42 24v28l42 24 42-24v-28z"/>
+            <path d="M180 100v76"/>
+          </g>
+          <circle cx="180" cy="128" r="10" fill="#8a2b1a"/>
+          <circle cx="180" cy="128" r="4" fill="#fdfaf0"/>
+          <g stroke="#37496b" stroke-width="1.3" fill="none">
+            <path d="M52 94v30M60 98l-14 4M64 110l-16 10M308 94v30M300 98l14 4M296 110l16 10"/>
+            <path d="M62 204l-8 14M110 222l-4 16M250 222l4 16M298 204l8 14"/>
+          </g>
+        </svg>
+        <button class="hot hot1" data-hot="0" aria-label="查看中心太阳纹注解">1</button>
+        <button class="hot hot2" data-hot="1" aria-label="查看勾纹注解">2</button>
+        <button class="hot hot3" data-hot="2" aria-label="查看对称结构注解">3</button>
+      </div>
+      <p class="note rv" data-d="200" style="text-align:center">点击数字查看纹样密码 · 示意图仅供科普</p>
+      <div class="weave-zone rv" data-d="260">
+        <div class="weave-band" aria-hidden="true">
+          <span class="shuttle"></span>
+        </div>
+      </div>
+      <p class="note rv" data-d="300" style="text-align:center">织锦如歌 · 梭子如笔——通经断纬，一寸一寸织出山河</p>
+      <div class="tech-list rv" data-d="360">
+        <div class="tech-item"><b>通经断纬</b><span>经线贯通全幅，纬线按纹样逐段换色挑织。</span></div>
+        <div class="tech-item"><b>反面挑织</b><span>在布面反面挑花，正面呈现完整图案，手艺全在指尖。</span></div>
+        <div class="tech-item"><b>土家配色</b><span>以黑、红、蓝为主基调，间以黄、绿、白，浓烈而和谐。</span></div>
+      </div>
+      <div class="page-footline rv" data-d="420">
+        <button class="cta" data-go="4">听一场摆手舞
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 05 · 摆手舞 ===== -->
+  <section class="page" id="p5" aria-label="摆手舞专题" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">板块三 · 歌舞传情</p>
+      <h2 class="sec-title rv" data-d="60">摆手舞 · 众人围圈山河动</h2>
+      <p class="sec-sub rv" data-d="140">摆手舞，土家语称「舍巴日」，是土家族祭祀祖先、庆祝丰收的大型集体歌舞，国家级非物质文化遗产。</p>
+      <div class="p5-hero rv" data-d="200">
+        <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/N9Ycb1rR1o1SQvxVRNXcuZQmn9g" alt="手绘土家族摆手舞集体插画" loading="lazy">
+      </div>
+      <div class="dancers rv" data-d="260" aria-hidden="true">
+        <span class="dancer"><svg viewBox="0 0 40 62" fill="currentColor"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+        <span class="dancer"><svg viewBox="0 0 40 62" fill="currentColor"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+        <span class="dancer"><svg viewBox="0 0 40 62" fill="currentColor"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+        <span class="dancer"><svg viewBox="0 0 40 62" fill="currentColor"><circle cx="20" cy="11" r="8.5"/><path d="M8 22c3-5 8-7 12-7s9 2 12 7l-5 24c-1.5 7-2.5 12-3.5 16h-7c-1-4-2-9-3.5-16z"/><path d="M8 26l-5 8 3 2 4-6zM32 26l5 8-3 2-4-6z"/></svg></span>
+      </div>
+      <div class="dance-cta rv" data-d="320">
+        <button class="snd-btn" id="danceSnd" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+          播放打溜子伴奏
+        </button>
+        <button class="cta ghost" data-go="5" style="margin-top:0">了解撒尔嗬</button>
+      </div>
+      <div class="page-footline rv" data-d="380">
+        <span class="note" style="margin:0">点击画面中的人物，拆解摆手的基本动作</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 06 · 撒尔嗬（庄重） ===== -->
+  <section class="page p6" id="p6" aria-label="撒尔嗬专题" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">板块三 · 歌舞传情</p>
+      <h2 class="sec-title rv" data-d="60">撒尔嗬 · 以鼓声送别</h2>
+      <div class="p6-respect rv" data-d="120">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.2 4.3.6-3.2 3 .8 4.3L12 13.1 8.4 15.1l.8-4.3-3.2-3 4.3-.6z"/><path d="M12 3v2.4"/></svg>
+        撒尔嗬为土家族丧葬仪式歌舞，请以敬畏之心、庄重阅读
+      </div>
+      <p class="para rv" data-d="200">撒尔嗬，土家语意为「跳丧鼓」，是土家族丧葬仪式中的歌舞，国家级非物质文化遗产。「人死众家丧，一打丧鼓二帮忙」——亲友以鼓点与歌声送别逝者，以舞蹈表达对生命的豁达：生如夏花，死亦从容。</p>
+      <p class="para rv" data-d="300">这不是悲戚的告别，而是土家人特有的生死观——他们相信，坦然起舞，是对生命最好的致敬。</p>
+      <div class="dance-cta rv" data-d="380" style="margin-top:22px">
+        <button class="snd-btn" id="drumSnd" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 12l6-6"/><path d="M3 12h9"/></svg>
+          聆听祭仪鼓点
+        </button>
+        <button class="cta ghost" data-go="6" style="margin-top:0">探访山居</button>
+      </div>
+      <div class="p6-hero rv" data-d="440">
+        <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/I6LHb0ggfoW4ARxrPL4c4QZ2naf" alt="撒尔嗬跳丧鼓线描插画" loading="lazy">
+        <p class="cap">线描示意 · 围鼓而舞，送故人远行</p>
+      </div>
+      <p class="p6-note rv" data-d="500">演示音频为程序合成节奏，正式版将替换为田野采录原声；本页内容仅作文化科普，表达对民俗的尊重。</p>
+    </div>
+  </section>
+
+  <!-- ===== 页面 07 · 吊脚楼全景 ===== -->
+  <section class="page" id="p7" aria-label="吊脚楼全景概览" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">板块四 · 山居匠心</p>
+      <h2 class="sec-title rv" data-d="60">土家吊脚楼 · 半边悬空的山居</h2>
+      <p class="sec-sub rv" data-d="140">吊脚楼是土家族依山而建的传统民居，属干栏式建筑：半边楼体悬空，以木柱支撑，上住人、下储物，既避湿防潮，又适应陡坡——是土家先民顺应山水的建筑智慧。</p>
+      <div class="stilt-wrap rv" data-d="200">
+        <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/RIy5bka5Ho5FLxxMUMYcnELEnDb" alt="手绘土家族吊脚楼全景插画" loading="lazy">
+        <button class="hotspot hs1" data-hot="st1" aria-label="查看屋顶介绍"><span class="hs-label">小青瓦屋顶</span></button>
+        <button class="hotspot hs2" data-hot="st2" aria-label="查看回廊介绍"><span class="hs-label">美人靠回廊</span></button>
+        <button class="hotspot hs3" data-hot="st3" aria-label="查看吊脚介绍"><span class="hs-label">吊脚立柱</span></button>
+        <button class="hotspot hs4" data-hot="st4" aria-label="查看底层介绍"><span class="hs-label">底层空间</span></button>
+      </div>
+      <p class="note rv" data-d="260" style="text-align:center">点击楼身上的标记，认识吊脚楼的每个部件</p>
+      <div class="page-footline rv" data-d="320">
+        <button class="cta" data-go="7">看木构如何生长
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 08 · 营造技艺 ===== -->
+  <section class="page" id="p8" aria-label="吊脚楼营造技艺" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">山居匠心 · 营造</p>
+      <h2 class="sec-title rv" data-d="60">木构营造智慧</h2>
+      <p class="para rv" data-d="120">吊脚楼采用穿斗式木结构：柱、梁、枋以榫卯相接，不用一颗铁钉。构件多在地面预拼、整体竖立，是土家木匠代代相传的营造智慧。</p>
+      <div class="build-stage rv" data-d="180">
+        <svg id="buildSvg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" aria-label="吊脚楼搭建过程示意图">
+          <g class="layer" data-stage="0">
+            <path d="M30 214h280" stroke="#7a6f58" stroke-width="5" stroke-linecap="round"/>
+            <path d="M50 214v-10M90 214v-12M140 214v-10M200 214v-12M250 214v-10M300 214v-12" stroke="#7a6f58" stroke-width="4"/>
+          </g>
+          <g class="layer" data-stage="1">
+            <path d="M70 214V96M170 214V60M270 214V96" stroke="#37496b" stroke-width="6" stroke-linecap="round"/>
+            <path d="M84 214v-40" stroke="#37496b" stroke-width="6"/><path d="M256 214v-40" stroke="#37496b" stroke-width="6"/>
+          </g>
+          <g class="layer" data-stage="2">
+            <path d="M70 150h200M70 190h200M170 100h-60M170 100h60" stroke="#b03a24" stroke-width="5" stroke-linecap="round"/>
+            <path d="M70 150l20-18M170 150l20-18M170 150l-20-18M270 150l-20-18" stroke="#b8862c" stroke-width="4"/>
+          </g>
+          <g class="layer" data-stage="3">
+            <path d="M60 214h220M58 212h224" stroke="#5c4a2e" stroke-width="4" stroke-linecap="round"/>
+            <path d="M60 96h220" stroke="#8a6a34" stroke-width="5" stroke-linecap="round"/>
+            <path d="M70 96v-18M270 96v-18" stroke="#8a6a34" stroke-width="5"/>
+          </g>
+          <g class="layer" data-stage="4">
+            <path d="M64 78h212v36H64z" stroke="#2a2419" stroke-width="2.6"/>
+            <path d="M64 78h212" stroke="#2a2419" stroke-width="2.6"/>
+            <rect x="110" y="88" width="34" height="26" fill="#fdfaf0" stroke="#2a2419" stroke-width="2"/>
+            <rect x="190" y="88" width="34" height="26" fill="#fdfaf0" stroke="#2a2419" stroke-width="2"/>
+          </g>
+          <g class="layer" data-stage="5">
+            <path d="M52 78l68-46 68 46" stroke="#2a2419" stroke-width="4" fill="#fdfaf0"/>
+            <path d="M120 32h88" stroke="#2a2419" stroke-width="4"/>
+            <path d="M60 78h116" stroke="#b03a24" stroke-width="1.4"/>
+            <path d="M70 68h40M120 60h46M176 52h34" stroke="#b03a24" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="slider-row rv" data-d="240">
+        <span class="stage-step mono">0/5</span>
+        <input type="range" id="buildRange" min="0" max="5" value="0" step="1" aria-label="吊脚楼搭建进度">
+        <span class="stage-label" id="stageLabel">平基</span>
+      </div>
+      <p class="note rv" data-d="280" style="text-align:center">拖动进度条 · 看吊脚楼从地基到屋顶的生长</p>
+      <div class="page-footline rv" data-d="340">
+        <button class="cta" data-go="8">参加民俗小闯关
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 09 · 民俗答题 ===== -->
+  <section class="page" id="p9" aria-label="民俗知识答题" inert>
+    <div class="page-in">
+      <p class="sec-label rv" data-d="0">板块五 · 尾声</p>
+      <h2 class="sec-title rv" data-d="60">知俗传韵 · 民俗小闯关</h2>
+      <p class="sec-sub rv" data-d="120">五道题，考考你对武陵四宝的了解程度。</p>
+      <div class="quiz-card rv" data-d="180" id="quizCard"></div>
+      <div class="page-footline rv" data-d="260">
+        <button class="cta" data-go="9">走向尾声
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页面 10 · 封底 ===== -->
+  <section class="page p10" id="p10" aria-label="封底与作品信息" inert>
+    <div class="p10-bg" aria-hidden="true"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Rq7JbD2C3ocpnkxikDNc0P0mnqe" alt="" loading="lazy"></div>
+    <div class="p10-scrim" aria-hidden="true"></div>
+    <div class="p10-in">
+      <div class="p10-seal rv" data-d="0" aria-hidden="true">承</div>
+      <h2 class="p10-slogan rv" data-d="80">传承土家非遗<br>让武陵遗韵<em>生生不息</em></h2>
+      <div class="info-cards">
+        <p class="info-card rv" data-d="180"><b>创作团队</b>　恩施土家族、苗族学生团队（以申报书为准）</p>
+        <p class="info-card rv" data-d="240"><b>作品载体</b>　移动端叙事交互 H5 · HTML5 + CSS3 + JavaScript</p>
+        <p class="info-card rv" data-d="300"><b>版权声明</b>　本作品仅用于学科竞赛，尊重并保护土家族民俗文化</p>
+      </div>
+      <div class="qr-zone rv" data-d="360"><span>作品二维码<br>上线后替换</span></div>
+      <div class="p10-back rv" data-d="420">
+        <button class="cta ghost" data-go="0">返回首页 · 再次启程</button>
+      </div>
+    </div>
+    <p class="p10-copy rv" data-d="480">© 2026 武陵遗韵 · 土家民俗 · 全国大学生数字媒体科技作品及创意竞赛</p>
+  </section>
+
+</div>
+
+<!-- 信息弹窗 -->
+<div class="modal-back" id="modalBack" role="dialog" aria-modal="true" aria-label="信息弹窗">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <button class="modal-close" id="modalClose" aria-label="关闭弹窗">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ==== APP_JS ==== */
+(function(){
+'use strict';
+
+/* ============ 环境 ============ */
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var COARSE = window.matchMedia('(pointer: coarse)').matches || /iPhone|Android/i.test(navigator.userAgent);
+var PANELS = 10;
+
+var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+var counter = document.getElementById('counter');
+var prog = document.getElementById('prog');
+var fnavLabel = document.getElementById('fnavLabel');
+var prevBtn = document.getElementById('prevBtn');
+var nextBtn = document.getElementById('nextBtn');
+var ovBrocade = document.getElementById('ovBrocade');
+var ovTrail = document.getElementById('ovTrail');
+var ovLines = document.getElementById('ovLines');
+
+var PAGE_NAMES = ['序章 · 武陵开篇','序章 · 人文引言','织锦华章 · 西兰卡普','织锦华章 · 纹样密码','歌舞传情 · 摆手舞','歌舞传情 · 撒尔嗬','山居匠心 · 吊脚楼','山居匠心 · 营造技艺','尾声 · 民俗闯关','尾声 · 封底'];
+
+/* ============ 工具函数 ============ */
+function lerp(a,b,t){ return a+(b-a)*t; }
+function easeInOutCubic(t){ return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+
+/* ============ 状态机 ============ */
+var current = 0;
+var lock = false;
+
+function triggerPanel(n){
+  var els = pages[n].querySelectorAll('.rv');
+  for (var i=0;i<els.length;i++){
+    var el = els[i];
+    var d = parseInt(el.getAttribute('data-d'),10)||0;
+    el.style.transitionDelay = d+'ms';
+    el.classList.add('in');
+  }
+}
+function resetPanel(n){
+  var els = pages[n].querySelectorAll('.rv');
+  for (var i=0;i<els.length;i++){
+    els[i].classList.remove('in');
+    els[i].style.transitionDelay = '';
+  }
+}
+function setActive(n){
+  for (var i=0;i<pages.length;i++){
+    var on = i===n;
+    pages[i].classList.toggle('active', on);
+    if (on){ pages[i].removeAttribute('inert'); pages[i].scrollTop = 0; }
+    else { pages[i].setAttribute('inert',''); }
+  }
+  triggerPanel(n);
+  updateChrome(n);
+  stopPageAudio(n);
+}
+function updateChrome(n){
+  counter.textContent = ('0'+(n+1)).slice(-2)+' / '+PANELS;
+  prog.style.width = ((n+1)/PANELS*100)+'%';
+  fnavLabel.textContent = PAGE_NAMES[n];
+  prevBtn.disabled = n===0;
+  nextBtn.disabled = n===PANELS-1;
+}
+
+/* ============ 转场引擎 ============ */
+var FWD = ['brocade','vslide','hslide','zoom','trail','drumshake','zoomin','linegrow','dissolve'];
+
+function goTo(n){
+  if (lock || n===current) return;
+  if (n<0 || n>=PANELS) return;
+  lock = true;
+  var from = current;
+  var type = (n===from+1) ? FWD[from] : 'fade';
+  if (RM){ switchNow(n); return; }
+  runTransition(type, from, n);
+}
+function switchNow(n){
+  resetPanel(current);
+  setActive(n);
+  current = n;
+  lock = false;
+}
+function cleanupTransition(a,b){
+  var all = pages.concat([ovBrocade,ovTrail,ovLines]);
+  for (var i=0;i<all.length;i++){
+    all[i].classList.remove('t-live','t-top','t-vslide-in','t-vslide-out','t-vslide-init',
+      't-hslide-in','t-hslide-out','t-hslide-init','t-zoom-in','t-zoom-out','t-zoom-init',
+      't-zoomin-in','t-zoomin-out','t-zoomin-init','t-fade-in','t-fade-out','t-fade-init','t-shake',
+      'on','out');
+  }
+}
+function runTransition(type, from, to){
+  var dur, midFrac, withOverlay = false, withShake = false, shakeExtra = false;
+  var f = pages[from], t = pages[to];
+  var clsOut, clsIn, clsInit;
+  var DUR = {
+    fade:.55, vslide:.62, hslide:.56, zoom:.62, zoomin:.72,
+    trail:.95, linegrow:.95, dissolve:.8, brocade:.72, drumshake:.75
+  };
+  dur = DUR[type]||.6; midFrac = .45;
+
+  function finish(){
+    cleanupTransition(f,t);
+    lock = false;
+  }
+
+  if (type==='brocade'){
+    ovBrocade.classList.add('on');
+    setTimeout(function(){ setActive(to); }, 360);
+    setTimeout(function(){ ovBrocade.classList.add('out'); }, 560);
+    setTimeout(function(){ ovBrocade.classList.remove('on','out'); lock=false; }, 1320);
+    current = to;
+    return;
+  }
+  if (type==='trail'){
+    ovTrail.classList.add('on');
+    clsOut='t-fade-out'; clsIn='t-fade-in'; clsInit='t-fade-init';
+    setTimeout(function(){ setActive(to); }, dur*midFrac);
+    setTimeout(function(){ ovTrail.classList.remove('on'); finish(); }, dur*1000);
+    current = to;
+    return;
+  }
+  if (type==='linegrow'){
+    ovLines.classList.add('on');
+    clsOut='t-fade-out'; clsIn='t-fade-in'; clsInit='t-fade-init';
+    setTimeout(function(){ setActive(to); }, dur*midFrac);
+    setTimeout(function(){ ovLines.classList.remove('on'); finish(); }, dur*1000);
+    current = to;
+    return;
+  }
+  if (type==='drumshake'){
+    clsOut='t-fade-out'; clsIn='t-shake'; clsInit='t-fade-init';
+    dur = drumPlaying ? 1.15 : .75;
+    setTimeout(function(){ setActive(to); }, dur*midFrac);
+    setTimeout(function(){
+      if (drumPlaying){ t.classList.remove('t-shake'); void t.offsetWidth; t.classList.add('t-shake'); }
+    }, 820);
+    setTimeout(function(){ finish(); }, dur*1000);
+    current = to;
+    return;
+  }
+  if (type==='vslide'){ clsOut='t-vslide-out'; clsIn='t-vslide-in'; clsInit='t-vslide-init'; }
+  else if (type==='hslide'){ clsOut='t-hslide-out'; clsIn='t-hslide-in'; clsInit='t-hslide-init'; }
+  else if (type==='zoom'){ clsOut='t-zoom-out'; clsIn='t-zoom-in'; clsInit='t-zoom-init'; }
+  else if (type==='zoomin'){ clsOut='t-zoomin-out'; clsIn='t-zoomin-in'; clsInit='t-zoomin-init'; }
+  else { clsOut='t-fade-out'; clsIn='t-fade-in'; clsInit='t-fade-init'; }
+
+  f.classList.add('t-live');
+  t.classList.add('t-live','t-top', clsInit);
+  void f.offsetWidth; void t.offsetWidth;
+  t.classList.remove(clsInit);
+  t.classList.add(clsIn);
+  f.classList.add(clsOut);
+  setTimeout(function(){ setActive(to); }, dur*midFrac*1000);
+  setTimeout(function(){ finish(); }, dur*1000);
+  current = to;
+}
+
+/* ============ 输入 ============ */
+var wheelAcc = 0, WHEEL_TH = 34;
+window.addEventListener('wheel', function(e){
+  if (lock) return;
+  wheelAcc += e.deltaY;
+  if (Math.abs(wheelAcc) >= WHEEL_TH){
+    goTo(current + (wheelAcc>0?1:-1));
+    wheelAcc = 0;
+  }
+},{passive:true});
+
+var ts = null;
+window.addEventListener('touchstart', function(e){
+  ts = { y:e.touches[0].clientY, t:performance.now() };
+},{passive:true});
+window.addEventListener('touchmove', function(e){
+  if (!ts) return;
+  var dy = e.touches[0].clientY - ts.y;
+  var p = pages[current];
+  var scrollable = p.scrollHeight > p.clientHeight + 2;
+  if (!scrollable){ e.preventDefault(); return; }
+  var atTop = p.scrollTop<=0, atBottom = p.scrollTop+p.clientHeight>=p.scrollHeight-2;
+  if ((dy<0&&atBottom)||(dy>0&&atTop)) e.preventDefault();
+},{passive:false});
+window.addEventListener('touchend', function(e){
+  if (!ts || lock){ ts=null; return; }
+  var diff = ts.y - e.changedTouches[0].clientY;
+  var td = performance.now() - ts.t;
+  var vel = Math.abs(diff)/Math.max(td,1);
+  if (Math.abs(diff)>58 || (td<350 && Math.abs(diff)>20 && vel>.35)){
+    goTo(current + (diff>0?1:-1));
+  }
+  ts = null;
+},{passive:true});
+
+window.addEventListener('keydown', function(e){
+  if (lock) return;
+  var n = null;
+  if (e.key==='ArrowDown'||e.key==='PageDown'||e.key===' ') n = current+1;
+  else if (e.key==='ArrowUp'||e.key==='PageUp') n = current-1;
+  if (n!==null){ e.preventDefault(); goTo(n); }
+});
+
+prevBtn.addEventListener('click', function(){ goTo(current-1); });
+nextBtn.addEventListener('click', function(){ goTo(current+1); });
+
+var goEls = document.querySelectorAll('[data-go]');
+for (var i=0;i<goEls.length;i++){
+  (function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      goTo(parseInt(el.getAttribute('data-go'),10));
+    });
+  })(goEls[i]);
+}
+
+/* ============ 弹窗 ============ */
+var modalBack = document.getElementById('modalBack');
+var modalTitle = document.getElementById('modalTitle');
+var modalBody = document.getElementById('modalBody');
+function openModal(title, html){
+  modalTitle.textContent = title;
+  modalBody.innerHTML = html;
+  modalBack.classList.add('on');
+  document.getElementById('modalClose').focus();
+}
+function closeModal(){ modalBack.classList.remove('on'); }
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modalBack.addEventListener('click', function(e){ if (e.target===modalBack) closeModal(); });
+window.addEventListener('keydown', function(e){ if (e.key==='Escape') closeModal(); });
+
+/* —— 纹样卡片 —— */
+var MOTIFS = [
+  {t:'四十八勾', svg:'<svg viewBox="0 0 120 120" width="120" height="120"><g fill="none" stroke="#b03a24" stroke-width="2"><path d="M60 10l42 24v44L60 102 18 78V34z"/><path d="M60 26l30 17v32L60 92 30 75V43z"/><path d="M60 40l18 10v20l-18 10-18-10V50z"/></g><circle cx="60" cy="60" r="9" fill="#8a2b1a"/><circle cx="60" cy="60" r="3.6" fill="#fdfaf0"/></svg>', txt:'「勾」是西兰卡普最经典的几何母题之一。四十八勾层层勾连、环环相扣，如太阳放射的光芒，象征生生不息与团圆美满。'},
+  {t:'阳雀花', svg:'<svg viewBox="0 0 120 120" width="120" height="120"><path d="M14 82c26-36 66-40 92-12 8-34-16-54-48-52-34 2-56 24-44 64z" fill="none" stroke="#b03a24" stroke-width="2"/><circle cx="86" cy="34" r="7" fill="none" stroke="#b8862c" stroke-width="2"/><path d="M28 96l-9 15M40 100l-8 15" stroke="#37496b" stroke-width="2.4"/><path d="M26 62l-12-8M88 66l14-10" stroke="#b8862c" stroke-width="2"/></svg>', txt:'阳雀（布谷鸟）在土家文化中寓意春天与生机。阳雀花纹样寄托着对春回大地、五谷丰登、吉祥如意的期盼。'},
+  {t:'台台花', svg:'<svg viewBox="0 0 120 120" width="120" height="120"><path d="M14 100h92M22 84h76M30 68h60M38 52h44M46 36h28M54 20h12" stroke="#b03a24" stroke-width="2.6" fill="none"/><path d="M18 100l8-16M102 100l-8-16M26 84l8-16M94 84l-8-16M34 68l8-16M86 68l-8-16M42 52l8-16M78 52l-8-16" stroke="#b8862c" stroke-width="2.2"/></svg>', txt:'台台花呈阶梯式向上延展，如楼台层层登高，寓意节节登高、家业兴旺，常见于被面与帐帘之上。'}
+];
+var motifEls = document.querySelectorAll('[data-motif]');
+for (var mi=0;mi<motifEls.length;mi++){
+  (function(el){
+    el.addEventListener('click', function(){
+      var d = MOTIFS[parseInt(el.getAttribute('data-motif'),10)];
+      openModal(d.t, '<div class="m-motif">'+d.svg+'</div><p>'+d.txt+'</p>');
+    });
+  })(motifEls[mi]);
+}
+
+/* —— 纹样解析热点 —— */
+var PATTERNS = [
+  {t:'中心 · 太阳纹', txt:'菱形中心的圆点如太阳，象征生命之源、光耀万物，是纹样的「心」。'},
+  {t:'勾纹 · 光芒', txt:'四周勾纹回旋环抱，如光芒流转，寓意周而复始、生生不息。'},
+  {t:'对称结构', txt:'上下左右严格对称，体现土家织造中秩序与均衡的美学。'}
+];
+var hotEls = document.querySelectorAll('[data-hot]');
+for (var hi=0;hi<hotEls.length;hi++){
+  (function(el){
+    el.addEventListener('click', function(){
+      var key = el.getAttribute('data-hot');
+      if (key.indexOf('st')===0){
+        var st = STILTS[key];
+        if (st) openModal(st.t, '<p style="margin-bottom:10px;font-size:.85rem;color:#7b7059">点击标记对应部位 · 吊脚楼</p><p>'+st.txt+'</p>');
+      } else {
+        var d = PATTERNS[parseInt(key,10)];
+        if (d) openModal(d.t, '<p>'+d.txt+'</p>');
+      }
+    });
+  })(hotEls[hi]);
+}
+
+/* —— 吊脚楼部件 —— */
+var STILTS = {
+  st1:{t:'小青瓦屋顶', txt:'小青瓦层层铺叠，隔热避雨，如鳞片般错落有致，是吊脚楼最轻盈的冠冕。'},
+  st2:{t:'美人靠回廊', txt:'「美人靠」回廊凭栏观山，是土家人日常起居、纳凉闲话、守望山野的所在。'},
+  st3:{t:'吊脚立柱', txt:'半边楼体悬于坡上，以圆木立柱支撑，如木之足，让建筑稳稳立于陡坡之间。'},
+  st4:{t:'底层空间', txt:'底层半开敞，用于圈养牲畜与堆放杂物，立体利用山地，物尽其用。'}
+};
+
+/* —— 摆手动作分解 —— */
+var DANCE_STEPS = [
+  {t:'单摆', txt:'双臂前后自然摆动，如挥锄劳作，是摆手最基础的动作。'},
+  {t:'双摆', txt:'双臂交替画弧，如展翅盘旋，动作舒展而热烈。'},
+  {t:'回旋摆', txt:'围绕圆圈转身回旋，众人相和，气势恢宏，将气氛推向高潮。'}
+];
+function openDance(){
+  var html = '<p style="font-size:.85rem;color:#7b7059;margin-bottom:12px">摆手基本动作 · 示意图解</p>';
+  for (var i=0;i<DANCE_STEPS.length;i++){
+    html += '<p style="margin-bottom:10px"><b style="color:#b03a24">'+(i+1)+'. '+DANCE_STEPS[i].t+'</b>　'+DANCE_STEPS[i].txt+'</p>';
+  }
+  openModal('摆手舞 · 动作分解', html);
+}
+var p5hero = document.querySelector('#p5 .p5-hero');
+if (p5hero) p5hero.addEventListener('click', openDance);
+var p5dancers = document.querySelector('#p5 .dancers');
+if (p5dancers) p5dancers.addEventListener('click', openDance);
+
+/* ============ 营造技艺滑块 ============ */
+var STAGES = ['平基','立柱','架梁','铺板','立墙','盖瓦'];
+var buildRange = document.getElementById('buildRange');
+var stageLabel = document.getElementById('stageLabel');
+var buildSvg = document.getElementById('buildSvg');
+var buildLayers = buildSvg ? Array.prototype.slice.call(buildSvg.querySelectorAll('.layer')) : [];
+function updateBuild(v){
+  var val = parseInt(v,10)||0;
+  stageLabel.textContent = STAGES[val];
+  buildRange.style.setProperty('--fill', (val/5*100)+'%');
+  for (var i=0;i<buildLayers.length;i++){
+    buildLayers[i].classList.toggle('shown', parseInt(buildLayers[i].getAttribute('data-stage'),10)<=val);
+  }
+}
+buildRange.addEventListener('input', function(){ updateBuild(this.value); });
+if (buildRange) updateBuild(0);
+
+/* ============ 全局音频管理器 ============ */
+var TRACKS = {
+  ambient:{url:'https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/EFFqb1JaRooheTxjaRTcX2ZinUh', vol:.38, tag:null},
+  dance:{url:'https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/ZzxDbxIXzojfS9xj984cgcNHnkd', vol:.5, tag:'danceSnd'},
+  drum:{url:'https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/LC6KbzdGSoihBdxhbWHcssFTnyf', vol:.55, tag:'drumSnd'}
+};
+var audios = {};
+(function initAudio(){
+  for (var k in TRACKS){
+    var a = document.createElement('audio');
+    a.src = TRACKS[k].url; a.loop = true; a.preload = 'auto'; a.volume = TRACKS[k].vol;
+    audios[k] = a;
+  }
+})();
+var muted = (function(){ try { return localStorage.getItem('wulingMuted')==='1'; } catch(e){ return false; } })();
+var ambientStarted = false;
+var drumPlaying = false;
+var dancePlaying = false;
+var audioBtn = document.getElementById('audioBtn');
+var audioIcoOn = document.getElementById('audioIcoOn');
+var audioIcoOff = document.getElementById('audioIcoOff');
+function syncMuteUI(){
+  audioBtn.setAttribute('aria-pressed', String(!muted));
+  audioBtn.setAttribute('aria-label', muted ? '开启背景音乐' : '关闭背景音乐');
+  audioBtn.classList.toggle('off', muted);
+  audioIcoOn.style.display = muted ? 'none' : '';
+  audioIcoOff.style.display = muted ? '' : 'none';
+}
+function applyMute(){
+  for (var k in audios){ audios[k].muted = muted; }
+  syncMuteUI();
+}
+audioBtn.addEventListener('click', function(){
+  muted = !muted;
+  try { localStorage.setItem('wulingMuted', muted?'1':'0'); } catch(e){}
+  applyMute();
+  if (!muted && !ambientStarted){
+    audios.ambient.play().catch(function(){});
+    ambientStarted = true;
+  }
+});
+function startAmbient(){
+  if (ambientStarted || muted) return;
+  ambientStarted = true;
+  audios.ambient.play().catch(function(){});
+}
+function playTrack(k, btnId){
+  if (muted){ audios[k].muted = true; }
+  audios[k].play().catch(function(){});
+  if (k==='drum') drumPlaying = true;
+  if (k==='dance') dancePlaying = true;
+  var b = btnId && document.getElementById(btnId);
+  if (b){ b.classList.add('playing'); b.setAttribute('aria-pressed','true'); }
+}
+function pauseTrack(k, btnId){
+  audios[k].pause();
+  audios[k].currentTime = 0;
+  if (k==='drum') drumPlaying = false;
+  if (k==='dance') dancePlaying = false;
+  var b = btnId && document.getElementById(btnId);
+  if (b){ b.classList.remove('playing'); b.setAttribute('aria-pressed','false'); }
+}
+function stopPageAudio(n){
+  if (n!==4 && dancePlaying) pauseTrack('dance', 'danceSnd');
+  if (n!==5 && drumPlaying) pauseTrack('drum', 'drumSnd');
+}
+document.getElementById('danceSnd').addEventListener('click', function(){
+  if (dancePlaying) pauseTrack('dance','danceSnd');
+  else { playTrack('dance','danceSnd'); if (muted) pauseTrack('dance','danceSnd'); }
+});
+document.getElementById('drumSnd').addEventListener('click', function(){
+  if (drumPlaying) pauseTrack('drum','drumSnd');
+  else { playTrack('drum','drumSnd'); if (muted) pauseTrack('drum','drumSnd'); }
+});
+window.addEventListener('pointerdown', function once(){
+  startAmbient();
+  window.removeEventListener('pointerdown', once);
+});
+applyMute();
+
+/* ============ 民俗答题 ============ */
+var QUIZ = [
+  {q:'西兰卡普是土家族的什么？', opts:['传统织锦','传统银饰','刺绣工艺','山歌小调'], a:0, exp:'西兰卡普即土家织锦，土家语意为「花铺盖」，2006 年列入国家级非物质文化遗产名录。'},
+  {q:'摆手舞通常在什么场合表演？', opts:['丧葬仪式','祭祖与节庆','日常劳作','集市贸易'], a:1, exp:'摆手舞多在祭祀祖先、庆祝丰收的节庆场合围圈而舞，动作多取农事与生活之形。'},
+  {q:'撒尔嗬是哪种仪式中的歌舞？', opts:['婚嫁迎亲','新生祝寿','丧葬送别','开秧下种'], a:2, exp:'撒尔嗬即「跳丧鼓」，是土家族丧葬仪式中的歌舞，以豁达的生死观送别逝者。'},
+  {q:'吊脚楼主要采用什么木结构？', opts:['抬梁式','穿斗式','井干式','拱券式'], a:1, exp:'吊脚楼以穿斗式木结构、榫卯相接，不用一颗铁钉，是适应山地的营造智慧。'},
+  {q:'「打溜子」是土家族的哪种艺术？', opts:['山歌','打击乐','织锦纹样','祭祀舞蹈'], a:1, exp:'打溜子由锣、钹等打击乐器合奏，节奏明快，常见于节庆与摆手舞伴奏。'}
+];
+var quizCard = document.getElementById('quizCard');
+var qIdx = 0, qScore = 0, qAnswered = false;
+function renderQuiz(){
+  quizCard.innerHTML = '';
+  if (qIdx >= QUIZ.length){ renderDone(); return; }
+  var q = QUIZ[qIdx];
+  var html = '<div class="q-head"><span class="q-no">'+(qIdx+1)+'</span><p class="q-text">'+q.q+'</p></div>';
+  html += '<div class="q-opts">';
+  for (var i=0;i<q.opts.length;i++){
+    html += '<button class="q-opt" data-oi="'+i+'"><span class="k">'+String.fromCharCode(65+i)+'</span><span>'+q.opts[i]+'</span></button>';
+  }
+  html += '</div>';
+  html += '<div class="q-exp" id="qExp"></div>';
+  html += '<div class="q-next"></div>';
+  quizCard.innerHTML = html;
+  qAnswered = false;
+  var opts = quizCard.querySelectorAll('.q-opt');
+  for (var j=0;j<opts.length;j++){
+    (function(btn){
+      btn.addEventListener('click', function(){
+        if (qAnswered) return;
+        qAnswered = true;
+        var oi = parseInt(btn.getAttribute('data-oi'),10);
+        var correct = oi === q.a;
+        if (correct) qScore++;
+        for (var k=0;k<opts.length;k++){
+          opts[k].disabled = true;
+          if (k===q.a) opts[k].classList.add('right');
+          else if (k===oi) opts[k].classList.add('wrong');
+        }
+        var exp = document.getElementById('qExp');
+        exp.textContent = (correct ? '回答正确 · ' : '再想想 · ') + q.exp;
+        exp.classList.add('show');
+        var next = quizCard.querySelector('.q-next');
+        var btnNext = document.createElement('button');
+        btnNext.className = 'cta';
+        btnNext.textContent = qIdx===QUIZ.length-1 ? '查看成绩' : '下一题';
+        btnNext.style.marginTop = '0';
+        btnNext.addEventListener('click', function(){
+          qIdx++;
+          renderQuiz();
+        });
+        next.appendChild(btnNext);
+      });
+    })(opts[j]);
+  }
+}
+function renderDone(){
+  var verdict = qScore>=5 ? '武陵非遗达人' : (qScore>=3 ? '民俗行家' : '初识武陵 · 再探一程');
+  quizCard.innerHTML =
+    '<div class="quiz-done show">' +
+    '<p class="score-line">五题得分</p>' +
+    '<p class="score-big">'+qScore+' / 5</p>' +
+    '<p class="verdict">'+verdict+'</p>' +
+    '<button class="cta ghost" id="quizAgain">重新作答</button>' +
+    '</div>';
+  document.getElementById('quizAgain').addEventListener('click', function(){
+    qIdx = 0; qScore = 0; renderQuiz();
+  });
+}
+renderQuiz();
+
+/* ============ 初始化 ============ */
+setActive(0);
+current = 0;
+lock = false;
+})();
+
+</script>
+</body>
+</html>
+<!-- （注：内容由AI生成） -->
